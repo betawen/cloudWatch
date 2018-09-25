@@ -9,21 +9,20 @@ app.use(bodyParser.urlencoded({extended:false}))
 app.use(cookieParser());
 
 
-let watch=require('./cloudWatchSample2')
-let cloud=require('./cloudWatchSample1')
+let watch3=require('./cloudWatchSample3')
+let watch4=require('./cloudWatchSample4')
 
 let url;
 let count=0;
-let data={url:count};
-cloud.putMetricData(count);
-watch.putMetricData({url:count})
 
 app.get('/hello',(req,res)=>{
-    count++;
-url=req.url;
-watch.putMetricData({req.originUrl:count})
-
+    watch3.putMetricData(req.originalUrl,1);
     res.send("helloworld\n");
+})
+
+app.post('./post',(req,res)=>{
+    watch4.putMetricData(req.originalUrl,1,req.Client_Version,Client_Name);
+    res.send("ok");
 })
 
 app.listen(8009,()=>{console.log("running on http://localhost:8009")});
