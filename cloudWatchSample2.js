@@ -46,7 +46,6 @@ function putMetricData(data){
     }
 };
 
-module.exports=putMetricData;
-
+exports.putMetricData=putMetricData;
 
 
