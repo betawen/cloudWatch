@@ -1,4 +1,4 @@
-let cloudWatch=require("./cloudWatchSample2")
+let cloudWatch=require("./cloudWatch/cloudWatchSample2")
 
 let md5=require('md5')
 let logger=require('winston').loggers.get('AuthorizationException');
@@ -15,3 +15,5 @@ function checkAccessKey(req,res,next){
         count++;
     }
 }
+
+module.exports = checkAccessKey;
