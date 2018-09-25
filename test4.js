@@ -21,7 +21,7 @@ app.get('/hello',(req,res)=>{
 })
 
 app.post('./post',(req,res)=>{
-    watch4.putMetricData(req.originalUrl,1,req.Client_Version,Client_Name);
+    watch4.putMetricData(req.originalUrl,1,req.header('Client_Version'),req.header('Client_Name'));
     res.send("ok");
 })
 
