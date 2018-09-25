@@ -17,7 +17,7 @@ function putMetricData(name,value,Client_Version,Client_Name){
             MetricName:name,
             Timestamp:new Date,
             Value:value,
-            Dimensions:{Client_version=Client_Version,Client_name=Client_Name}
+            Dimensions:{Client_version:Client_Version,Client_name:Client_Name}
         }],
         NameSpace:'user-count'
     };
@@ -25,7 +25,7 @@ function putMetricData(name,value,Client_Version,Client_Name){
     return new Promise((resolve,reject)=>{
         params.MetricData[0].Value=value;
         params.MetricData[0].Timestamp=new Date();
-        params.MetricData[0].Dimensions={Client_version=Client_Version,Client_name=Client_Name};
+        params.MetricData[0].Dimensions={Client_version:Client_Version,Client_name:Client_Name};
 
         cloudWatch.putMetricData(params,(err,data)=>{
             if(err){
