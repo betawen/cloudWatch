@@ -17,7 +17,7 @@ function putMetricData(name,value,Client_Version,Client_Name){
             MetricName:name,
             Timestamp:new Date,
             Value:value,
-            Dimensions:{Client_Version=Client_Version,Client_Name=Client_Name}
+            Dimensions:{Client_version=Client_Version,Client_name=Client_Name}
         }],
         NameSpace:'user-count'
     };
