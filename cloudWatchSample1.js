@@ -1,6 +1,6 @@
 const AWS = require('aws-sdk');
 
-const logger = require('./dummy_game_event_data');
+//const logger = require('./dummy_game_event_data');
 
 AWS.config.update({region:'us-east-1'});
 
@@ -8,7 +8,7 @@ let cloudWatch;
 
 let params = {
     MetricData:[{
-        MetricName:'UserCount',
+        MetricName:'Count',
         Timestamp: new Date,
         Value :10
     }],

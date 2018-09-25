@@ -9,16 +9,21 @@ app.use(bodyParser.urlencoded({extended:false}))
 app.use(cookieParser());
 
 
-let cloud=require('./cloudWatchSample2')
+let watch=require('./cloudWatchSample2')
+let cloud=require('./cloudWatchSample1')
 
 let url;
 let count=0;
-let data=JSON.stringify({url:count});
-cloud.putMetricData(data);
+let data={url:count};
+cloud.putMetricData(count);
+watch.putMetricData({url:count})
 
 app.get('/hello',(req,res)=>{
     count++;
-    res.send("helloworld");
+url=req.url;
+watch.putMetricData({req.originUrl:count})
+
+    res.send("helloworld\n");
 })
 
 app.listen(8009,()=>{console.log("running on http://localhost:8009")});
