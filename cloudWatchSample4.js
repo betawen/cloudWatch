@@ -52,4 +52,7 @@ function putMetricData(name,value,Client_Version,Client_Name){
     });
 }
 
+putMetricData("test",1,"1.0","beta");
+putMetricData("test",1,"2.0","beta");
+
 exports.putMetricData=putMetricData;
