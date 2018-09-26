@@ -5,7 +5,9 @@ let app=express();
 let watch3=require('./cloudWatchSample3')
 
 app.get('/hello',(req,res)=>{
-    watch3.putMetricData(req.originalUrl,1);
+    let count=1;
+    let url=req.originalUrl;
+    watch3.putMetricData(url,count);
     res.send("helloworld\n");
 })
 
