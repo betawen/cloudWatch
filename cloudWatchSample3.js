@@ -10,6 +10,7 @@ function putMetricData(name,value){
     if(!cloudWatch){
         cloudWatch=new AWS.CloudWatch();
     }
+
     console.log("Params vailed");
 
     let params={
@@ -18,7 +19,7 @@ function putMetricData(name,value){
             Timestamp:new Date,
             Value:value
         }],
-        NameSpace:'user-count'
+        Namespace:'user-count'
     };
 
     return new Promise((resolve,reject)=>{
@@ -29,7 +30,7 @@ function putMetricData(name,value){
             if(err){
                 console.log("Error: sending metrics to cloudWatch");
                 console.log(err,err.stack);
-                console.log(err.stack);
+                reject(err.stack);
             }else{
                 console.log("Sending metrics to cloudWatch successfully! ");
                 console.log(data);
