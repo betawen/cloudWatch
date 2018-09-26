@@ -11,7 +11,7 @@ app.get('/hello',(req,res)=>{
 })
 
 app.get('/dimension',(req,res)=>{
-    watch4.putMetricData(req.originalUrl,1,"3.3","beta");
+    watch4.putMetricData("user",req.originalUrl,1,"3.3","beta");
     res.send("ok");
 })
 

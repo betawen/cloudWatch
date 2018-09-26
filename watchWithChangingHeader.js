@@ -3,7 +3,7 @@ AWS.config.update({region:'us-east-1'});
 
 let cloudWatch;
 
-function putMetricData(name,value,dimension1,dimension2){
+function putMetricData(namespace,name,value,dimension){
     if(typeof value==='undefined' || typeof name === 'undefined' || !Number.isInteger(value) || value<0){
         console.log("Invailed params.");
     }
@@ -17,29 +17,20 @@ function putMetricData(name,value,dimension1,dimension2){
             MetricName:name,
             Timestamp:new Date,
             Value:value,
-            Dimensions:[
-                {
-                    Name:"Client_Version",
-                    Value:Client_Version
-                },
-                {
-                    Name:"Client_Name",
-                    Value:Client_Name
-                }
-            ]
         }],
-        Namespace:'user-count'
+        Namespace:namespace
     };
     return new Promise((resolve,reject)=>{
         params.MetricData[0].Value=value;
         params.MetricData[0].Timestamp=new Date();
-        for([key,value] of Object.entries(dimension1)){
-            params.MetricData[0].Dimensions[0].Name= key;
-            params.MetricData[0].Dimensions[0].Value= value;
-        }
-        for([key,value] of Object.entries(dimension2)){
-            params.MetricData[0].Dimensions[1].Name= key;
-            params.MetricData[0].Dimensions[1].Value= value;
+        if (dimension) {
+            params.Dimensions = [];
+            for([key,value] of Object.entries(dimension)){
+                params.MetricData[0].Dimensions.push({
+                    Name:key,
+                    Value:value
+                })
+            }
         }
 
         cloudWatch.putMetricData(params,(err,data)=>{
