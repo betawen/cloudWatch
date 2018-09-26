@@ -19,7 +19,7 @@ function putMetricData(name,value,Client_Version,Client_Name){
             Value:value,
             Dimensions:{Client_version:Client_Version,Client_name:Client_Name}
         }],
-        NameSpace:'user-count'
+        Namespace:'user-count'
     };
 
     return new Promise((resolve,reject)=>{
@@ -31,7 +31,7 @@ function putMetricData(name,value,Client_Version,Client_Name){
             if(err){
                 console.log("Error: sending metrics to cloudWatch");
                 console.log(err,err.stack);
-                console.log(err.stack);
+                reject(err.stack);
             }else{
                 console.log("Sending metrics to cloudWatch successfully! ");
                 console.log(data);
