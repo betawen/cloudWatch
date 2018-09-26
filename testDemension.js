@@ -10,7 +10,7 @@ app.get('/hello',(req,res)=>{
     res.send("helloworld\n");
 })
 
-app.get('./demension',(req,res)=>{
+app.get('/demension',(req,res)=>{
     watch4.putMetricData(req.originalUrl,1,3.3,"beta");
     res.send("ok");
 })
